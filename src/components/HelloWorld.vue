@@ -16,7 +16,7 @@ export default {
     async login () {
       const options = {
         method: 'GET',
-        url: 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1635880494&redirect_uri=http://localhost:8080/&state=123abc'
+        url: 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1635880494&redirect_uri=https://line-login.netlify.com/&state=123abc'
       }
       let data = await axios(options)
       console.log(data, 'data')
