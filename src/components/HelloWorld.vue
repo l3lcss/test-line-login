@@ -6,6 +6,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+const querystring = require('querystring')
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -16,9 +19,24 @@ export default {
       window.location.href = 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1635880494&redirect_uri=https://line-login.netlify.com/&state=123abc'
     }
   },
-  mounted () {
-    let lineCode = this.$route.query.code
-    console.log(lineCode, 'lineCode')
+  async mounted () {
+    const code = this.$route.query.code
+    const data = {
+      grant_type: 'authorization_code',
+      client_id: '1635880494',
+      client_secret: 'd105fd17568b15c6f427b1d1974586e5',
+      code,
+      redirect_uri: 'https://line-login.netlify.com/'
+    }
+    const options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: querystring.stringify(data),
+      url: 'https://api.line.me/v2/oauth/accessToken'
+    }
+    let res = await axios(options)
+    console.log(code, 'code')
+    console.log(res, 'res')
   }
 }
 </script>
