@@ -7,8 +7,7 @@
 
 <script>
 import axios from 'axios'
-const querystring = require('querystring')
-
+import querystring from 'querystring'
 export default {
   name: 'HelloWorld',
   props: {
@@ -28,19 +27,25 @@ export default {
       code,
       redirect_uri: 'https://line-login.netlify.com'
     }
-    console.log(querystring, 'querystring')
-    console.log(data, 'data')
-    // const options = {
-    //   method: 'POST',
-    //   data: querystring.stringify(data),
-    //   url: 'https://api.line.me/v2/oauth/accessToken'
-    // }
-    let res = await axios.post(
-      'https://api.line.me/oauth2/v2.1/token',
-      querystring.stringify(data)
-    )
-    console.log(code, 'code')
-    console.log(res, 'res')
+    const options = {
+      method: 'POST',
+      header: {
+        'Access-Control-Allow-Origin': 'https://line-login.netlify.com'
+      },
+      data: querystring.stringify(data),
+      url: 'https://api.line.me/oauth2/v2.1/token'
+    }
+    console.log(options, 'options')
+
+    // querystring.stringify(data)
+    if (code) {
+      try {
+        let res = await axios(options)
+        console.log(res, 'res')
+      } catch (error) {
+        console.log(error, 'error')
+      }
+    }
   }
 }
 </script>
