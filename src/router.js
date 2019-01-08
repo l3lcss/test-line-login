@@ -12,6 +12,10 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1635880494&redirect_uri=http://localhost:8080/&state=123abc',
+      name: 'line-login'
     }
   ]
 })
