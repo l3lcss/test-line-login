@@ -28,13 +28,17 @@ export default {
       code,
       redirect_uri: 'https://line-login.netlify.com/'
     }
-    const options = {
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      data: querystring.stringify(data),
-      url: 'https://api.line.me/v2/oauth/accessToken'
-    }
-    let res = await axios(options)
+    console.log(querystring, 'querystring')
+    console.log(data, 'data')
+    // const options = {
+    //   method: 'POST',
+    //   data: querystring.stringify(data),
+    //   url: 'https://api.line.me/v2/oauth/accessToken'
+    // }
+    let res = await axios.post(
+      'https://api.line.me/oauth2/v2.1/token',
+      querystring.stringify(data)
+    )
     console.log(code, 'code')
     console.log(res, 'res')
   }
