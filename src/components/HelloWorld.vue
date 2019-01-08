@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     async login () {
-      window.location.href = 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1635880494&redirect_uri=https://line-login.netlify.com/&state=123abc'
+      window.location.href = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1635880494&redirect_uri=https%3A%2F%2Fline-login.netlify.com&state=12345abcde&scope=openid%20profile&nonce=09876xyz'
     }
   },
   async mounted () {
@@ -26,7 +26,7 @@ export default {
       client_id: '1635880494',
       client_secret: 'd105fd17568b15c6f427b1d1974586e5',
       code,
-      redirect_uri: 'https://line-login.netlify.com/'
+      redirect_uri: 'https://line-login.netlify.com'
     }
     console.log(querystring, 'querystring')
     console.log(data, 'data')
