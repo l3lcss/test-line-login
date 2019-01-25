@@ -1,13 +1,11 @@
 <template>
   <div class="hello">
-    <!-- <img src="../assets/btn_login_base.png" alt=""> -->
     <div class="btn-login-line" @click="login()"></div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import querystring from 'querystring'
 export default {
   name: 'HelloWorld',
   props: {
@@ -15,29 +13,20 @@ export default {
   },
   methods: {
     async login () {
-      window.location.href = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1635880494&redirect_uri=https%3A%2F%2Fline-login.netlify.com&state=12345abcde&scope=openid%20profile&nonce=09876xyz'
+      window.location.href = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1635880494&redirect_uri=https://line-login.netlify.com&state=login&scope=openid%20profile&nonce=test'
     }
   },
   async mounted () {
     const code = this.$route.query.code
-    const data = {
-      grant_type: 'authorization_code',
-      client_id: '1635880494',
-      client_secret: 'd105fd17568b15c6f427b1d1974586e5',
-      code,
-      redirect_uri: 'https://line-login.netlify.com'
-    }
     const options = {
       method: 'POST',
-      header: {
-        'Access-Control-Allow-Origin': 'https://line-login.netlify.com'
+      data: {
+        code,
+        redirect_uri: 'https://line-login.netlify.com'
       },
-      data: querystring.stringify(data),
-      url: 'https://api.line.me/oauth2/v2.1/token'
+      url: 'https://herolcu-test.herokuapp.com/line-token'
     }
-    console.log(options, 'options')
 
-    // querystring.stringify(data)
     if (code) {
       try {
         let res = await axios(options)
@@ -69,5 +58,15 @@ export default {
   width: 303px;
   height: 88px;
   cursor: pointer;
+}
+.btn {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 5rem;
+  background-color: cadetblue;
+  width: 303px;
+  height: 88px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 </style>
